@@ -1,1 +1,2 @@
-# Soil_Moisture_Tracker
+# Soil Moisture Tracker  
+This project involves reading in moisture levels from a soil moisture sensor which will be connected to a raspberry pi. The raspberry pi will then send that data over to Google Cloud where it can store the data. On Google Cloud, I will also host a web application which will allow users to track the moisture levels from their potted plants.
