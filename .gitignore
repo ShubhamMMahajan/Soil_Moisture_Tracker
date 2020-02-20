@@ -1,3 +1,4 @@
 credentials.json
 db_schema_code.txt
 *.pem
+env/
