@@ -4,7 +4,6 @@ ser = serial.Serial('/dev/ttyUSB0',9600)
 s = [0,1]
 while True:
     read_serial=ser.readline()
-    s[0] = str(int (ser.readline(),16))
-    print(s[0])
-    print(read_serial)
+    serial_decoded = read_serial.decode("utf-8").strip()
+    print(serial_decoded)
     time.sleep(1)
