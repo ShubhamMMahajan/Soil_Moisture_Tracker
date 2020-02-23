@@ -19,12 +19,13 @@ import sys
 import socket
 import time
 
-import Adafruit_DHT
-from colors import bcolors
+#import Adafruit_DHT
+#from colors import bcolors
+import serial
 
 DHT_SENSOR_PIN = 4
 
-ADDR = ''
+ADDR = '192.168.1.22'
 PORT = 10000
 # Create a UDP socket
 client_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -75,24 +76,28 @@ def RunAction(action):
     print('Response {}'.format(event_response))
 
 
+ser = serial.Serial('/dev/ttyUSB0', 9600)
+
 try:
     random.seed()
     RunAction('detach')
     RunAction('attach')
 
     while True:
-        h, t = Adafruit_DHT.read_retry(22, DHT_SENSOR_PIN)
-        t = t * 9.0/5 + 32
+        #h, t = Adafruit_DHT.read_retry(22, DHT_SENSOR_PIN)
+        #t = t * 9.0/5 + 32
 
-        h = "{:.3f}".format(h)
-        t = "{:.3f}".format(t)
+        #h = "{:.3f}".format(h)
+        #t = "{:.3f}".format(t)
+        read_serial = ser.readline()
+        h = read_serial.decode("utf-8").strip()
         sys.stdout.write(
             '\r >>' + bcolors.CGREEN + bcolors.BOLD +
-            'Temp: {}, Hum: {}'.format(t, h) + bcolors.ENDC + ' <<')
+            'Hum: {}'.format(h) + bcolors.ENDC + ' <<')
         sys.stdout.flush()
 
         message = MakeMessage(
-            device_id, 'event', 'temperature={}, humidity={}'.format(t, h))
+            device_id, 'event', 'humidity={}'.format(h))
 
         SendCommand(client_sock, message, False)
         time.sleep(2)
