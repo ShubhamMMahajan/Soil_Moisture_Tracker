@@ -10,9 +10,9 @@ ser = serial.Serial('/dev/ttyUSB0',9600)
 # Define some project-based variables to be used below. This should be the only
 # block of variables that you need to edit in order to run this script
 
-ssl_private_key_filepath = '/home/shubham/Documents/Github/Soil_Moisture_Tracker/new-rpi-dir/rsa_private.pem'
+ssl_private_key_filepath = '/home/pi/Documents/Github/Soil_Moisture_Tracker/new-rpi-dir/demo_private.pem'
 ssl_algorithm = 'RS256' # Either RS256 or ES256
-root_cert_filepath = '/home/shubham/Documents/Github/Soil_Moisture_Tracker/new-rpi-dir/roots.pem'
+root_cert_filepath = '/home/pi/Documents/Github/Soil_Moisture_Tracker/new-rpi-dir/roots.pem'
 project_id = 'soil-moisture-monitor-269202'
 gcp_location = 'us-central1'
 registry_id = 'soil_sensors'
@@ -61,7 +61,7 @@ client.loop_start()
 
 # Could set this granularity to whatever we want based on device, monitoring needs, etc
 #temperature = 0
-humidity = 0
+#humidity = 0
 #pressure = 0
 
 #sense = SenseHat()
@@ -72,17 +72,17 @@ for i in range(1, 11):
     #cur_humidity = sense.get_humidity()
 
     read_serial=ser.readline()
-    serial_decoded = read_serial.decode("utf-8").strip()
+    serial_decoded = int(read_serial.decode("utf-8").strip())
     
     
 
     
-    humidity = cur_humidity
+    #humidity = cur_humidity
 
-    payload = '{{ "humidity": {} }}'.format(int(serial_decoded))
+    payload = '{{ "humidity": {} }}'.format(serial_decoded)
 
     # Uncomment following line when ready to publish
-    #  client.publish(_MQTT_TOPIC, payload, qos=1)
+    client.publish(_MQTT_TOPIC, payload, qos=1)
 
     print("{}\n".format(payload))
 
