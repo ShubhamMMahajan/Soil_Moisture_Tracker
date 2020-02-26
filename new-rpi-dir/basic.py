@@ -17,7 +17,7 @@ project_id = 'soil-moisture-monitor-269202'
 gcp_location = 'us-central1'
 registry_id = 'soil_sensors'
 device_id = 'my-sensor'
-
+unique_id = 'device_1'
 # end of user-variables
 
 cur_time = datetime.datetime.utcnow()
@@ -66,26 +66,28 @@ client.loop_start()
 
 #sense = SenseHat()
 
-for i in range(1, 11):
+while True:
     #cur_temp = sense.get_temperature()
     #cur_pressure = sense.get_pressure()
     #cur_humidity = sense.get_humidity()
-
-    read_serial=ser.readline()
-    serial_decoded = int(read_serial.decode("utf-8").strip())
-    
+    try:
+        read_serial=ser.readline()
+        serial_decoded = float(read_serial.decode("utf-8").strip())
+    except:
+        print("Error: ", read_serial.decode("utf-8").strip())
+    current_time = datetime.datetime.now() 
     
 
     
     #humidity = cur_humidity
 
-    payload = '{{ "humidity": {} }}'.format(serial_decoded)
+    payload = '{{"id": {} , "humidity": {}, "timestamp": {} }}'.format(unique_id, serial_decoded, current_time)
 
     # Uncomment following line when ready to publish
     client.publish(_MQTT_TOPIC, payload, qos=1)
 
     print("{}\n".format(payload))
 
-    time.sleep(1)
+    time.sleep(10)
 
 client.loop_stop()
