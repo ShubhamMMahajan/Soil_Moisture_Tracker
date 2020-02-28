@@ -9,7 +9,7 @@ ser = serial.Serial('/dev/ttyUSB0',9600)
 
 # Define some project-based variables to be used below. This should be the only
 # block of variables that you need to edit in order to run this script
-
+time.sleep(60)
 ssl_private_key_filepath = '/home/pi/Documents/Github/Soil_Moisture_Tracker/new-rpi-dir/demo_private.pem'
 ssl_algorithm = 'RS256' # Either RS256 or ES256
 root_cert_filepath = '/home/pi/Documents/Github/Soil_Moisture_Tracker/new-rpi-dir/roots.pem'
@@ -66,22 +66,19 @@ client.loop_start()
 
 #sense = SenseHat()
 
-while True:
-    #cur_temp = sense.get_temperature()
-    #cur_pressure = sense.get_pressure()
-    #cur_humidity = sense.get_humidity()
+def get_humidity():
     try:
         read_serial=ser.readline()
         serial_decoded = float(read_serial.decode("utf-8").strip())
+        return serial_decoded
     except:
-        print("Error: ", read_serial.decode("utf-8").strip())
+        print("Error trying to read data from serial")
+        return -1.0
+
+while True:
+    humidity = get_humidity()
     current_time = datetime.datetime.now() 
-    
-
-    
-    #humidity = cur_humidity
-
-    payload = '{{"id": {} , "humidity": {}, "timestamp": {} }}'.format(unique_id, serial_decoded, current_time)
+    payload = '{{"id": {} , "humidity": {}, "timestamp": {} }}'.format(unique_id, humidity, current_time)
 
     # Uncomment following line when ready to publish
     client.publish(_MQTT_TOPIC, payload, qos=1)
