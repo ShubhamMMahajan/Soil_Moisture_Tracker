@@ -78,7 +78,7 @@ def get_humidity():
 while True:
     humidity = get_humidity()
     current_time = datetime.datetime.now() 
-    payload = '{{"id": {} , "humidity": {}, "timestamp": {} }}'.format(unique_id, humidity, current_time)
+    payload = '{"id": "{}" , "humidity": {}, "timestamp": {} }'.format(unique_id, humidity, current_time)
 
     # Uncomment following line when ready to publish
     client.publish(_MQTT_TOPIC, payload, qos=1)
