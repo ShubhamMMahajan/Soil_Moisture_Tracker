@@ -24,6 +24,24 @@ body {
 #customBtn:hover {
   cursor: pointer;
 }
+
+#hardware {
+	left: 5%;
+	top: 15%;
+	width: 40%;
+	height: auto;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#meter {
+	right: 5%;
+	top: 15%;
+	width: 40%;
+	height: auto;
+	padding-left: 10px;
+	padding-right: 10px;
+}
 span.label {
   font-family: serif;
   font-weight: normal;

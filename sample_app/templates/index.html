@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>Datastore and Firebase Auth Example</title>
+  <title>Soil Moisture Tracker</title>
   <script src="{{ url_for('static', filename='script.js') }}"></script>
   
 </head>
@@ -24,14 +24,16 @@
 
   </script>
   <span id='ct' ></span>
+  <br>
 
-  <h2>Last 10 visits</h2>
+  <!-- <h2>Last 10 visits</h2>
   {% for time in times %}
     <p>{{ time }}</p>
-  {% endfor %}
+  {% endfor %} -->
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
  <script src="https://apis.google.com/js/api:client.js"></script>
-<img src="../static/hardware.jpg">
+<img src="../static/hardware.jpg" id="hardware">
+<img src="../static/meter.jpg" id="meter">
 <script>
   var googleUser = {};
   var startApp = function() {
