@@ -7,7 +7,7 @@
 </head>
 <body onload=display_ct();>
   <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <h1>Datastore and Firebase Auth Example</h1>
+  <h1 id="Title">Soil Moisture Tracker</h1>
 
   <script type="text/javascript"> 
   	function display_c(){
@@ -17,7 +17,7 @@
 
 	function display_ct() {
 		var x = new Date()
-		var x1=x.toUTCString();// changing the display to UTC string
+		var x1=x.toLocaleString();
 		document.getElementById('ct').innerHTML = x1;
 		tt=display_c();
 	 }
@@ -31,7 +31,7 @@
   {% endfor %}
 <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
  <script src="https://apis.google.com/js/api:client.js"></script>
-
+<img src="../static/hardware.jpg">
 <script>
   var googleUser = {};
   var startApp = function() {

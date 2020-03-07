@@ -5,7 +5,12 @@ body {
   background-repeat: no-repeat;
   text-align: center;
 }
+#Title {
+	font-size: 5em;
+	font-family: 'helvetica', sans-serif;
+	font-weight: bold;
 
+}
 #customBtn {
   display: inline-block;
   background: white;
