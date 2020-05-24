@@ -3,3 +3,4 @@ db_schema_code.txt
 *.pem
 env/
 test/
+node_modules/
